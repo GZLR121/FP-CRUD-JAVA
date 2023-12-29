@@ -10,8 +10,8 @@ import bean.Usuario;
 import mantenimiento.GestionUsuario;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -92,23 +92,35 @@ public class FormLogin extends JFrame {
 	}
 
 	protected void registrar() {
-		// TODO Auto-generated method stub
-		
+		FormRegistroCliente RegistroCliente = new FormRegistroCliente();
+		RegistroCliente.setVisible(true);
+		this.dispose();
 	}
 
 	protected void ingresar() {
 		
-		String tfno_usuario = txtTfno.getText();
-		String dni_usuario = txtDNI.getText();
+		String tfno = txtTfno.getText();
+		String dni = txtDNI.getText();
 		
 		GestionUsuario gestionUsuario = new GestionUsuario();
+		int tfno_usuario = Integer.parseInt(tfno);
+		long dni_usuario = Integer.parseInt(dni);
 		
 		Usuario usuario2 = new Usuario();
 		usuario2.setTfno(tfno_usuario);
+		usuario2.setDni(dni_usuario);
 		
 		
+		Usuario usu = gestionUsuario.obtenerUsuario(usuario2);
 		
-		Usuario usu = gestionUsuario.obtenerUsuario(usu);
+		if (usu!=null) {
+			JOptionPane.showMessageDialog(contentPane, "Bienvenido");
+			
+			FormPrincipal principal = new FormPrincipal();
+			principal.setVisible(true);
+		} else {
+			JOptionPane.showMessageDialog(contentPane, "Datos Invalidos", "Error", JOptionPane.ERROR_MESSAGE);
+		}
 		
 	}
 }
