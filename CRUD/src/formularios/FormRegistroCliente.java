@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
 import com.toedter.calendar.JDateChooser;
 
@@ -45,8 +46,9 @@ public class FormRegistroCliente extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @param <Date>
 	 */
-	public FormRegistroCliente() {
+	public <Date> FormRegistroCliente() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 320);
 		contentPane = new JPanel();
@@ -100,12 +102,55 @@ public class FormRegistroCliente extends JFrame {
 		lblFecha_cum.setBounds(45, 126, 140, 16);
 		contentPane.add(lblFecha_cum);
 		
+		JDateChooser jdc_fecha = new JDateChooser();
+		jdc_fecha.setBounds(215, 126, 120, 20);
+		contentPane.add(jdc_fecha);
+		
 		JButton btnRegistrar = new JButton("Registrar");
 		btnRegistrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Registrar();
-			}
-		});
+				
+				String name = txtNombre.getText();
+				String lastname = txtApellidos.getText();
+				String fecha;
+				SimpleDateFormat f = new SimpleDateFormat ("yyyy-MM-dd");
+				fecha = f.format(jdc_fecha.getDate());
+				
+				String tfno = txtTfno.getText();
+				String dni = txtDNI.getText();
+				
+				GestionUsuario gestionUsuario = new GestionUsuario();
+				long tfno_usuario = Long.parseLong(tfno);
+				long dni_usuario = Long.parseLong(dni);
+				
+				Usuario usuario2 = new Usuario();
+				usuario2.setDni(dni_usuario);
+				
+				
+				Usuario usu = gestionUsuario.obtenerUsuarioRegistroBusqueda(usuario2);
+				
+				GestionUsuario regisUsuario = new GestionUsuario();
+				
+ 				Usuario usuario3 = new Usuario();
+				usuario3.setDni(dni_usuario);
+				usuario3.setNombre(name);
+				usuario3.setApellidos(lastname);
+				usuario3.setFecha(fecha);
+				usuario3.setTfno(tfno_usuario);
+				
+				//Usuario usu3 = regisUsuario.UsuarioRegistro(usuario3);
+				
+				if (usu!=null) {
+					JOptionPane.showMessageDialog(contentPane, "Este DNI ya esta en uso.", "Error", JOptionPane.ERROR_MESSAGE);
+
+				} else {
+					regisUsuario.UsuarioRegistro(usuario3);
+					JOptionPane.showMessageDialog(contentPane, "¡Usuario Registrado Correctamente!");	
+				}
+				
+			}	
+		}
+		);
 		btnRegistrar.setBounds(179, 247, 89, 23);
 		contentPane.add(btnRegistrar);
 		
@@ -116,51 +161,8 @@ public class FormRegistroCliente extends JFrame {
 			}
 		});
 		btnBack.setFont(new Font("Tahoma", Font.BOLD, 13));
-		btnBack.setBounds(10, 11, 43, 43);
+		btnBack.setBounds(10, 11, 50, 43);
 		contentPane.add(btnBack);
-		
-		JDateChooser dateChooser = new JDateChooser();
-		dateChooser.setDateFormatString("y-M-d");
-		dateChooser.setBounds(210, 126, 120, 20);
-		contentPane.add(dateChooser);
-	}
-
-	protected void Registrar() {
-		
-		String name = txtNombre.getText();
-		String lastname = txtApellidos.getText();
-		//String fecha = dateChooser.getText();
-		String tfno = txtTfno.getText();
-		String dni = txtDNI.getText();
-		
-		GestionUsuario gestionUsuario = new GestionUsuario();
-		int tfno_usuario = Integer.parseInt(tfno);
-		long dni_usuario = Integer.parseInt(dni);
-		
-		Usuario usuario2 = new Usuario();
-		usuario2.setDni(dni_usuario);
-		
-		
-		Usuario usu = gestionUsuario.obtenerUsuarioRegistro(usuario2);
-		
-		GestionUsuario regisUsuario = new GestionUsuario();
-		
-		Usuario usuario3 = new Usuario();
-		usuario3.setDni(dni_usuario);
-		usuario3.setNombre(name);
-		usuario3.setApellidos(lastname);
-		usuario3.setTfno(tfno_usuario);
-		
-		//Usuario usu3 = regisUsuario.UsuarioRegistro(usuario3);
-		
-		if (usu!=null) {
-			JOptionPane.showMessageDialog(contentPane, "Este DNI ya esta en uso.", "Error", JOptionPane.ERROR_MESSAGE);
-
-		} else {
-			regisUsuario.UsuarioRegistro(usuario3);
-			JOptionPane.showMessageDialog(contentPane, "¡Usuario Registrado Correctamente!");	
-		}
-		
 	}
 
 	protected void Back() {
@@ -169,3 +171,10 @@ public class FormRegistroCliente extends JFrame {
 		this.dispose();
 	}
 }
+	
+	
+	
+	
+	
+	
+	

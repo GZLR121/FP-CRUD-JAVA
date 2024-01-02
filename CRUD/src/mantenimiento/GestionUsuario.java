@@ -26,12 +26,12 @@ public Usuario obtenerUsuario(Usuario usu) {
 	 pst = con.prepareStatement(sql);
 	 
 	 pst.setLong(1, usu.getDni());
-	 pst.setInt(2, usu.getTfno());
+	 pst.setLong(2, usu.getTfno());
 	 
 	 rs = pst.executeQuery();
 	 
 	 while(rs.next()) {
-		 usuario = new Usuario(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getInt(4));
+		 usuario = new Usuario(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getLong(5));
 	 }
 	
 	}catch (Exception e) {
@@ -40,7 +40,7 @@ public Usuario obtenerUsuario(Usuario usu) {
 	return usuario;
 	
 }
-public Usuario obtenerUsuarioRegistro(Usuario usu) {
+public Usuario obtenerUsuarioRegistroBusqueda(Usuario usu) {
 	Usuario usuario = null;
 	
 	Connection con = null;
@@ -60,11 +60,12 @@ public Usuario obtenerUsuarioRegistro(Usuario usu) {
 	 rs = pst.executeQuery();
 	 
 	 while(rs.next()) {
-	return usuario;
+		 usuario = new Usuario(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getLong(5));
 	 }
 	
 	}catch (Exception e) {
 	System.out.println("Error en obtener usuario");
+	e.printStackTrace();
 	}
 	return usuario;
 	
@@ -81,24 +82,22 @@ public Usuario UsuarioRegistro(Usuario usu) {
 		
 	 con = MySQLConexion.getConexion();
 	 
-	 String sql = "INSERT INTO cliente(dni, nombre, apellidos, fecha_nac, tfno) VALUES ('?','?','?','?','?')";
+	 String sql = "INSERT INTO cliente(dni, nombre, apellidos, fecha_nac, tfno) VALUES (?,?,?,?,?)";
 	 
 	 pst = con.prepareStatement(sql);
 	 
 	 pst.setLong(1, usu.getDni());
 	 pst.setString(2, usu.getNombre());
 	 pst.setString(3, usu.getApellidos());
-	 //pst.setDate(4, usu.get());
-	 pst.setInt(5, usu.getTfno());
+	 pst.setString(4, usu.getFecha());
+	 pst.setLong(5, usu.getTfno());
 	 
-	 rs = pst.executeQuery();
+	 pst.execute();
 	 
-	 while(rs.next()) {
-	return usuario;
-	 }
 	
 	}catch (Exception e) {
 	System.out.println("Error en registrar usuario");
+	e.printStackTrace();
 	}
 	return usuario;
 	

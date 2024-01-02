@@ -73,7 +73,7 @@ public class FormLogin extends JFrame {
 				ingresar();
 			}
 		});
-		btnINGRESAR.setBounds(98, 170, 89, 23);
+		btnINGRESAR.setBounds(97, 170, 100, 23);
 		contentPane.add(btnINGRESAR);
 		
 		JButton btnREGISTRAR = new JButton("REGISTRAR");
@@ -82,7 +82,7 @@ public class FormLogin extends JFrame {
 				registrar();
 			}
 		});
-		btnREGISTRAR.setBounds(238, 170, 89, 23);
+		btnREGISTRAR.setBounds(238, 170, 100, 23);
 		contentPane.add(btnREGISTRAR);
 		
 		txtDNI = new JTextField();
@@ -103,8 +103,8 @@ public class FormLogin extends JFrame {
 		String dni = txtDNI.getText();
 		
 		GestionUsuario gestionUsuario = new GestionUsuario();
-		int tfno_usuario = Integer.parseInt(tfno);
-		long dni_usuario = Integer.parseInt(dni);
+		long tfno_usuario = Long.parseLong(tfno);
+		long dni_usuario = Long.parseLong(dni);
 		
 		Usuario usuario2 = new Usuario();
 		usuario2.setTfno(tfno_usuario);
@@ -118,6 +118,7 @@ public class FormLogin extends JFrame {
 			
 			FormPrincipal principal = new FormPrincipal();
 			principal.setVisible(true);
+			this.dispose();
 		} else {
 			JOptionPane.showMessageDialog(contentPane, "Datos Invalidos", "Error", JOptionPane.ERROR_MESSAGE);
 		}
