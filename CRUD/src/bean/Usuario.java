@@ -5,13 +5,15 @@ public class Usuario {
 	private long dni;
 	private String nombre;
 	private String apellidos;
-	private int tfno;
+	private String fecha;
+	private long tfno;
 
-	public Usuario(long dni, String nombre, String apellidos, int tfno) {
+	public Usuario(long dni, String nombre, String apellidos, String fecha ,long tfno) {
 
 		this.dni = dni;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
+		this.setFecha(fecha);
 		this.tfno = tfno;
 	}
 
@@ -43,12 +45,20 @@ public class Usuario {
 		this.apellidos = apellidos;
 	}
 
-	public int getTfno() {
+	public long getTfno() {
 		return tfno;
 	}
 
-	public void setTfno(int tfno) {
+	public void setTfno(long tfno) {
 		this.tfno = tfno;
+	}
+
+	public String getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(String fecha) {
+		this.fecha = fecha;
 	}
 
 }
