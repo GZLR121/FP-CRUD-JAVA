@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
+//import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import javax.swing.JButton;
@@ -119,7 +119,7 @@ public class FormRegistroCliente extends JFrame {
 				String tfno = txtTfno.getText();
 				String dni = txtDNI.getText();
 				
-				GestionUsuario gestionUsuario = new GestionUsuario();
+				//GestionUsuario gestionUsuario = new GestionUsuario();
 				long tfno_usuario = Long.parseLong(tfno);
 				long dni_usuario = Long.parseLong(dni);
 				
@@ -127,7 +127,7 @@ public class FormRegistroCliente extends JFrame {
 				usuario2.setDni(dni_usuario);
 				
 				
-				Usuario usu = gestionUsuario.obtenerUsuarioRegistroBusqueda(usuario2);
+				//Usuario usu = gestionUsuario.obtenerUsuarioRegistroBusqueda(usuario2);
 				
 				GestionUsuario regisUsuario = new GestionUsuario();
 				
@@ -138,15 +138,17 @@ public class FormRegistroCliente extends JFrame {
 				usuario3.setFecha(fecha);
 				usuario3.setTfno(tfno_usuario);
 				
+				regisUsuario.UsuarioRegistro(usuario3);
+				
 				//Usuario usu3 = regisUsuario.UsuarioRegistro(usuario3);
 				
-				if (usu!=null) {
+				/*if (usu!=null) {
 					JOptionPane.showMessageDialog(contentPane, "Este DNI ya esta en uso.", "Error", JOptionPane.ERROR_MESSAGE);
 
 				} else {
 					regisUsuario.UsuarioRegistro(usuario3);
 					JOptionPane.showMessageDialog(contentPane, "¡Usuario Registrado Correctamente!");	
-				}
+				}*/
 				
 			}	
 		}

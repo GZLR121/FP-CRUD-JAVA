@@ -5,6 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import bean.Usuario;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -13,6 +16,7 @@ public class FormPrincipal extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	public Usuario usuario2;
 
 	/**
 	 * Launch the application.
@@ -34,6 +38,10 @@ public class FormPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public FormPrincipal() {
+
+		//Long tfno = usuario2.getTfno();
+		//System.out.println(tfno);
+		
 		setResizable(false);
 		setTitle("Menu");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -96,6 +104,7 @@ public class FormPrincipal extends JFrame {
 
 	protected void perfil() {
 		FormPerfil perfil = new FormPerfil();
+		perfil.usuario2 = usuario2;
 		perfil.setVisible(true);
 		this.dispose();
 	}

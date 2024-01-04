@@ -7,11 +7,18 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+//import javax.swing.JOptionPane;
+
 import com.toedter.calendar.JDateChooser;
+
+import bean.Usuario;
+import mantenimiento.GestionUsuario;
+
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
 
 public class FormPerfil extends JFrame {
@@ -20,10 +27,11 @@ public class FormPerfil extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtDNI;
 	private JTextField txtTfno;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField txtNombre;
+	private JTextField txtApellidos;
+	private JTextField txtFecha;
 
+	public Usuario usuario2;
 	/**
 	 * Launch the application.
 	 */
@@ -33,7 +41,6 @@ public class FormPerfil extends JFrame {
 				try {
 					FormPerfil frame = new FormPerfil();
 					frame.setVisible(true);
-					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -45,6 +52,7 @@ public class FormPerfil extends JFrame {
 	 * Create the frame.
 	 */
 	public FormPerfil() {
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 325);
 		contentPane = new JPanel();
@@ -55,7 +63,8 @@ public class FormPerfil extends JFrame {
 		
 		txtDNI = new JTextField();
 		txtDNI.setEditable(false);
-		txtDNI.setBounds(100, 120, 86, 20);
+		txtDNI.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		txtDNI.setBounds(100, 120, 100, 20);
 		contentPane.add(txtDNI);
 		txtDNI.setColumns(10);
 		
@@ -68,57 +77,116 @@ public class FormPerfil extends JFrame {
 		contentPane.add(lblTfno);
 		
 		txtTfno = new JTextField();
+		txtTfno.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		txtTfno.setEditable(false);
 		txtTfno.setColumns(10);
-		txtTfno.setBounds(289, 120, 86, 20);
+		txtTfno.setBounds(289, 120, 100, 20);
 		contentPane.add(txtTfno);
 		
 		JLabel lblNombre = new JLabel("Nombre:");
 		lblNombre.setBounds(44, 182, 55, 14);
 		contentPane.add(lblNombre);
 		
-		textField = new JTextField();
-		textField.setEditable(false);
-		textField.setColumns(10);
-		textField.setBounds(100, 179, 86, 20);
-		contentPane.add(textField);
+		txtNombre = new JTextField();
+		txtNombre.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		txtNombre.setEditable(false);
+		txtNombre.setColumns(10);
+		txtNombre.setBounds(100, 179, 100, 20);
+		contentPane.add(txtNombre);
 		
 		JLabel lblApellidos = new JLabel("Apellidos:");
 		lblApellidos.setBounds(230, 182, 55, 14);
 		contentPane.add(lblApellidos);
 		
-		textField_1 = new JTextField();
-		textField_1.setEditable(false);
-		textField_1.setColumns(10);
-		textField_1.setBounds(289, 179, 86, 20);
-		contentPane.add(textField_1);
+		txtApellidos = new JTextField();
+		txtApellidos.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		txtApellidos.setEditable(false);
+		txtApellidos.setColumns(10);
+		txtApellidos.setBounds(289, 179, 100, 20);
+		contentPane.add(txtApellidos);
 		
-		JDateChooser dateChooser = new JDateChooser();
-		dateChooser.setBounds(255, 234, 120, 20);
-		contentPane.add(dateChooser);
+		JDateChooser jdc_Fecha = new JDateChooser();
+		jdc_Fecha.setBounds(255, 234, 120, 20);
+		contentPane.add(jdc_Fecha);
 		
 		JLabel lblFecha = new JLabel("Fecha de Nacimiento:");
-		lblFecha.setBounds(44, 237, 110, 14);
+		lblFecha.setBounds(30, 237, 115, 14);
 		contentPane.add(lblFecha);
 		
-		textField_2 = new JTextField();
-		textField_2.setEditable(false);
-		textField_2.setColumns(10);
-		textField_2.setBounds(150, 234, 100, 20);
-		contentPane.add(textField_2);
-		
-		JButton btnEditar = new JButton("Editar");
-		btnEditar.setBounds(55, 65, 89, 23);
-		contentPane.add(btnEditar);
+		txtFecha = new JTextField();
+		txtFecha.setEditable(false);
+		txtFecha.setColumns(10);
+		txtFecha.setBounds(155, 234, 100, 20);
+		contentPane.add(txtFecha);
 		
 		JButton btnEliminar = new JButton("Eliminar");
+		btnEliminar.setEnabled(false);
+		btnEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Eliminar();
+			}
+			
+		});
 		btnEliminar.setBackground(new Color(255, 0, 0));
-		btnEliminar.setBounds(286, 65, 89, 23);
+		btnEliminar.setBounds(286, 75, 89, 23);
 		contentPane.add(btnEliminar);
 		
 		JButton btnGuardar = new JButton("Guardar");
-		btnGuardar.setBounds(174, 65, 89, 23);
+		btnGuardar.setEnabled(false);
+		btnGuardar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String name = txtNombre.getText();
+				String lastname = txtApellidos.getText();
+				String fecha;
+				SimpleDateFormat f = new SimpleDateFormat ("yyyy-MM-dd");
+				//fecha = f.format(jdc_Fecha.getDate());
+				int Id = usuario2.getId_cliente();
+				fecha = txtFecha.getText();
+				String tfno = txtTfno.getText();
+				String dni = txtDNI.getText();
+				
+				//GestionUsuario gestionUsuario = new GestionUsuario();
+				long tfno_usuario = Long.parseLong(tfno);
+				long dni_usuario = Long.parseLong(dni);
+				
+				//Usuario usuario3 = new Usuario();
+				usuario2.setDni(dni_usuario);
+				
+				
+				GestionUsuario regisUsuario = new GestionUsuario();
+				
+ 				Usuario usuario2 = new Usuario();
+				usuario2.setDni(dni_usuario);
+				usuario2.setNombre(name);
+				usuario2.setApellidos(lastname);
+				usuario2.setFecha(fecha);
+				usuario2.setTfno(tfno_usuario);
+				usuario2.setId_cliente(Id);
+				regisUsuario.UsuarioUpdate(usuario2);
+				
+				/*if (usu!=null) {
+					JOptionPane.showMessageDialog(contentPane, "Este DNI ya esta en uso.", "Error", JOptionPane.ERROR_MESSAGE);
+
+				} else {
+					regisUsuario.UsuarioUpdate(usuario2);
+					JOptionPane.showMessageDialog(contentPane, "¡Usuario Registrado Correctamente!");	*/
+				}
+				
+			}
+			
+		);
+		btnGuardar.setBounds(175, 75, 89, 23);
 		contentPane.add(btnGuardar);
+		
+		JButton btnEditar = new JButton("Editar");
+		btnEditar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Editar();
+				btnGuardar.setEnabled(true);
+			}
+		});
+		btnEditar.setBounds(55, 75, 89, 23);
+		contentPane.add(btnEditar);
 		
 		JButton btnBack = new JButton("<");
 		btnBack.addActionListener(new ActionListener() {
@@ -129,6 +197,42 @@ public class FormPerfil extends JFrame {
 		btnBack.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnBack.setBounds(10, 11, 50, 43);
 		contentPane.add(btnBack);
+		
+		JButton btnDatos = new JButton("Mostrar Datos");
+		btnDatos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Datos();
+				/*String fecha;
+				SimpleDateFormat f = new SimpleDateFormat ("d MMM y");
+				fecha = f.format(usuario2.getFecha());
+				jdc_Fecha.setDateFormatString(fecha);*/
+			}
+		});
+		btnDatos.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnDatos.setBounds(314, 12, 110, 43);
+		contentPane.add(btnDatos);
+	}
+
+	protected void Eliminar() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	protected void Editar() {
+		txtNombre.setEditable(true);
+		txtApellidos.setEditable(true);
+		txtDNI.setEditable(true);
+		txtTfno.setEditable(true);
+		txtFecha.setEditable(true);
+		
+	}
+
+	protected void Datos() {
+		txtNombre.setText(usuario2.getNombre());
+		txtApellidos.setText(usuario2.getApellidos());
+		txtFecha.setText(usuario2.getFecha());
+		txtDNI.setText(usuario2.getDni().toString());
+		txtTfno.setText(usuario2.getTfno().toString());
 	}
 
 	protected void Back() {
