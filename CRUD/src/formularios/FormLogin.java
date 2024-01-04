@@ -110,13 +110,15 @@ public class FormLogin extends JFrame {
 		usuario2.setTfno(tfno_usuario);
 		usuario2.setDni(dni_usuario);
 		
-		
 		Usuario usu = gestionUsuario.obtenerUsuario(usuario2);
 		
 		if (usu!=null) {
 			JOptionPane.showMessageDialog(contentPane, "Bienvenido");
-			
+			usuario2.setApellidos(usu.getApellidos());
+			usuario2.setFecha(usu.getFecha());
+			usuario2.setNombre(usu.getNombre());
 			FormPrincipal principal = new FormPrincipal();
+			principal.usuario2 = usuario2;
 			principal.setVisible(true);
 			this.dispose();
 		} else {

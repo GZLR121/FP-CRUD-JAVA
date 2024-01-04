@@ -2,30 +2,31 @@ package bean;
 
 public class Usuario {
 
-	private long dni;
+	private Long dni;
 	private String nombre;
 	private String apellidos;
 	private String fecha;
-	private long tfno;
+	private Long tfno;
+	private int id_cliente;
 
-	public Usuario(long dni, String nombre, String apellidos, String fecha ,long tfno) {
+	public Usuario(Long dni, String nombre, String apellidos, String fecha ,Long tfno, int id_cliente) {
 
 		this.dni = dni;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
-		this.setFecha(fecha);
 		this.tfno = tfno;
+		this.fecha = fecha;
 	}
 
 	public Usuario() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public long getDni() {
+	public Long getDni() {
 		return dni;
 	}
 
-	public void setDni(long dni) {
+	public void setDni(Long dni) {
 		this.dni = dni;
 	}
 
@@ -45,11 +46,11 @@ public class Usuario {
 		this.apellidos = apellidos;
 	}
 
-	public long getTfno() {
+	public Long getTfno() {
 		return tfno;
 	}
 
-	public void setTfno(long tfno) {
+	public void setTfno(Long tfno) {
 		this.tfno = tfno;
 	}
 
@@ -59,6 +60,14 @@ public class Usuario {
 
 	public void setFecha(String fecha) {
 		this.fecha = fecha;
+	}
+
+	public int getId_cliente() {
+		return id_cliente;
+	}
+
+	public void setId_cliente(int id_cliente) {
+		this.id_cliente = id_cliente;
 	}
 
 }
