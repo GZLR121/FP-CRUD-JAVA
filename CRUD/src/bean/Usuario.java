@@ -7,15 +7,16 @@ public class Usuario {
 	private String apellidos;
 	private String fecha;
 	private Long tfno;
-	private int id_cliente;
+	private Integer id_cliente;
 
-	public Usuario(Long dni, String nombre, String apellidos, String fecha ,Long tfno, int id_cliente) {
+	public Usuario(Long dni, String nombre, String apellidos, String fecha ,Long tfno, Integer id_cliente) {
 
 		this.dni = dni;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.tfno = tfno;
 		this.fecha = fecha;
+		this.id_cliente = id_cliente;
 	}
 
 	public Usuario() {
@@ -62,11 +63,11 @@ public class Usuario {
 		this.fecha = fecha;
 	}
 
-	public int getId_cliente() {
+	public Integer getId_cliente() {
 		return id_cliente;
 	}
 
-	public void setId_cliente(int id_cliente) {
+	public void setId_cliente(Integer id_cliente) {
 		this.id_cliente = id_cliente;
 	}
 

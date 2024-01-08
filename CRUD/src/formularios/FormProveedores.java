@@ -30,6 +30,7 @@ public class FormProveedores extends JFrame {
 	private JTextField txtBuscar;
 
 	public Proveedor proveedor;
+	public Usuario usuario2;
 	/**
 	 * Launch the application.
 	 */
@@ -61,6 +62,12 @@ public class FormProveedores extends JFrame {
 		contentPane.setLayout(null);
 		
 		JButton btnGuardar = new JButton("Guardar");
+		btnGuardar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Guardar();	
+				btnGuardar.setEnabled(false);
+			}
+		});
 		btnGuardar.setEnabled(false);
 		btnGuardar.setBounds(222, 75, 89, 23);
 		contentPane.add(btnGuardar);
@@ -79,6 +86,11 @@ public class FormProveedores extends JFrame {
 		contentPane.add(btnEditar);
 		
 		JButton btnEliminar = new JButton("Eliminar");
+		btnEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Eliminar();
+			}
+		});
 		btnEliminar.setEnabled(false);
 		btnEliminar.setBackground(Color.RED);
 		btnEliminar.setBounds(328, 75, 89, 23);
@@ -95,21 +107,27 @@ public class FormProveedores extends JFrame {
 		contentPane.add(lblDNI);
 		
 		JLabel lblTfno = new JLabel("Nombre:");
-		lblTfno.setBounds(193, 133, 46, 14);
+		lblTfno.setBounds(195, 133, 55, 14);
 		contentPane.add(lblTfno);
 		
 		txtNombre = new JTextField();
 		txtNombre.setEditable(false);
 		txtNombre.setColumns(10);
-		txtNombre.setBounds(249, 130, 123, 20);
+		txtNombre.setBounds(252, 130, 123, 20);
 		contentPane.add(txtNombre);
 		
 		JButton btnAgregar = new JButton("Agregar");
+		btnAgregar.setEnabled(false);
+		btnAgregar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Agregar();
+			}
+		});
 		btnAgregar.setBounds(10, 75, 89, 23);
 		contentPane.add(btnAgregar);
 		
 		JLabel lblDireccion = new JLabel("Direccion:");
-		lblDireccion.setBounds(84, 178, 55, 14);
+		lblDireccion.setBounds(84, 178, 60, 14);
 		contentPane.add(lblDireccion);
 		
 		txtDireccion = new JTextField();
@@ -148,7 +166,7 @@ public class FormProveedores extends JFrame {
 		btnBuscar.setBounds(275, 22, 89, 23);
 		contentPane.add(btnBuscar);
 		
-		JButton btnLimpiar = new JButton("Limpiar");
+		JButton btnLimpiar = new JButton("Habilitar / Limpiar");
 		btnLimpiar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				txtRFC.setText("");
@@ -163,8 +181,60 @@ public class FormProveedores extends JFrame {
 				btnGuardar.setEnabled(false);
 			}
 		});
-		btnLimpiar.setBounds(328, 227, 89, 23);
+		btnLimpiar.setBounds(267, 227, 150, 23);
 		contentPane.add(btnLimpiar);
+	}
+
+	protected void Agregar() {
+		String RFC = txtRFC.getText();
+		String Nombre = txtNombre.getText();
+		String Direccion = txtDireccion.getText();
+		
+		GestionProveedor insert = new GestionProveedor();
+
+		boolean existe = insert.provRFCExiste(RFC);
+
+		if (existe) {
+			JOptionPane.showMessageDialog(contentPane, "Este RFC ya esta en uso.", "Error", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		Proveedor proveedor = new Proveedor();
+		
+		proveedor.setRfc(RFC);
+		proveedor.setNombre(Nombre);
+		proveedor.setDireccion(Direccion);
+		
+		insert.ProveedorInsert(proveedor);
+		}
+		
+
+	protected void Eliminar() {
+		String RFC = proveedor.getRfc();
+		GestionProveedor delete = new GestionProveedor();
+
+		proveedor = new Proveedor();
+		
+		proveedor.setRfc(RFC);
+		
+		delete.ProveedorDelete(proveedor);
+		
+	}
+
+	protected void Guardar() {
+		String Nombre = txtNombre.getText();
+		String Direccion = txtDireccion.getText();
+		String RFC = proveedor.getRfc();
+		
+		GestionProveedor update = new GestionProveedor();
+		
+		proveedor = new Proveedor();
+		
+		proveedor.setNombre(Nombre);
+		proveedor.setDireccion(Direccion);
+		proveedor.setRfc(RFC);
+		
+		update.ProveedorUpdate(proveedor);
+		
 	}
 
 	protected void Buscar() {
@@ -172,7 +242,7 @@ public class FormProveedores extends JFrame {
 		
 		GestionProveedor gestionproveedor = new GestionProveedor();
 		
-		Proveedor proveedor = new Proveedor();
+		proveedor = new Proveedor();
 		proveedor.setRfc(rfc);
 		
 		Proveedor pro = gestionproveedor.obtenerProveedor(proveedor);
@@ -180,11 +250,13 @@ public class FormProveedores extends JFrame {
 		if (pro!=null) {
 			proveedor.setDireccion(pro.getDireccion());
 			proveedor.setNombre(pro.getNombre());
+			proveedor.setRfc(pro.getRfc());
+			
 			txtRFC.setText(pro.getRfc());
 			txtNombre.setText(pro.getNombre());
 			txtDireccion.setText(pro.getDireccion());
 		} else {
-			JOptionPane.showMessageDialog(contentPane, "Datos Invalidos", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(contentPane, "RFC no existente", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 		
 		
@@ -192,6 +264,7 @@ public class FormProveedores extends JFrame {
 
 	protected void Back() {
 		FormPrincipal principal = new FormPrincipal();
+		principal.usuario2 = usuario2;
 		principal.setVisible(true);
 		this.dispose();
 		

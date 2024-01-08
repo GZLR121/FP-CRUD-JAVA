@@ -44,6 +44,7 @@ public class FormLogin extends JFrame {
 	 * Create the frame.
 	 */
 	public FormLogin() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -117,6 +118,7 @@ public class FormLogin extends JFrame {
 			usuario2.setApellidos(usu.getApellidos());
 			usuario2.setFecha(usu.getFecha());
 			usuario2.setNombre(usu.getNombre());
+			usuario2.setId_cliente(usu.getId_cliente());
 			FormPrincipal principal = new FormPrincipal();
 			principal.usuario2 = usuario2;
 			principal.setVisible(true);

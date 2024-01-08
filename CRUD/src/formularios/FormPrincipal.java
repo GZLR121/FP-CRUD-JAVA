@@ -53,6 +53,13 @@ public class FormPrincipal extends JFrame {
 		contentPane.setLayout(null);
 		
 		JButton btnJuegos = new JButton("Juegos");
+		btnJuegos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				juegos();
+				
+			}	
+		});
 		btnJuegos.setBounds(128, 55, 175, 148);
 		contentPane.add(btnJuegos);
 		
@@ -93,6 +100,14 @@ public class FormPrincipal extends JFrame {
 		contentPane.add(btnSalir);
 	}
 
+	protected void juegos() {
+		FormJuegos juegos = new FormJuegos();
+		juegos.usuario2 = usuario2;
+		juegos.setVisible(true);
+		this.dispose();
+		
+	}
+
 	protected void Salir() {
 		System.exit(0);
 	}
@@ -111,6 +126,7 @@ public class FormPrincipal extends JFrame {
 
 	protected void provedores() {
 		FormProveedores proveedores = new FormProveedores();
+		proveedores.usuario2 = usuario2;
 		proveedores.setVisible(true);
 		this.dispose();
 		
