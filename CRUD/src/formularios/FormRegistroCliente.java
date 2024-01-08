@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 //import javax.swing.JOptionPane;
+import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import javax.swing.JButton;
@@ -27,6 +28,7 @@ public class FormRegistroCliente extends JFrame {
 	private JTextField txtApellidos;
 	private JTextField txtTfno;
 	private JTextField txtDNI;
+	
 
 	/**
 	 * Launch the application.
@@ -49,6 +51,7 @@ public class FormRegistroCliente extends JFrame {
 	 * @param <Date>
 	 */
 	public <Date> FormRegistroCliente() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 320);
 		contentPane = new JPanel();
@@ -119,15 +122,19 @@ public class FormRegistroCliente extends JFrame {
 				String tfno = txtTfno.getText();
 				String dni = txtDNI.getText();
 				
-				//GestionUsuario gestionUsuario = new GestionUsuario();
+				GestionUsuario gestionUsuario = new GestionUsuario();
 				long tfno_usuario = Long.parseLong(tfno);
 				long dni_usuario = Long.parseLong(dni);
 				
 				Usuario usuario2 = new Usuario();
 				usuario2.setDni(dni_usuario);
 				
-				
-				//Usuario usu = gestionUsuario.obtenerUsuarioRegistroBusqueda(usuario2);
+				boolean existe = gestionUsuario.usuarioDNIExiste(dni_usuario);
+
+				if (existe) {
+					JOptionPane.showMessageDialog(contentPane, "Este DNI ya esta en uso.", "Error", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
 				
 				GestionUsuario regisUsuario = new GestionUsuario();
 				
@@ -139,16 +146,6 @@ public class FormRegistroCliente extends JFrame {
 				usuario3.setTfno(tfno_usuario);
 				
 				regisUsuario.UsuarioRegistro(usuario3);
-				
-				//Usuario usu3 = regisUsuario.UsuarioRegistro(usuario3);
-				
-				/*if (usu!=null) {
-					JOptionPane.showMessageDialog(contentPane, "Este DNI ya esta en uso.", "Error", JOptionPane.ERROR_MESSAGE);
-
-				} else {
-					regisUsuario.UsuarioRegistro(usuario3);
-					JOptionPane.showMessageDialog(contentPane, "¡Usuario Registrado Correctamente!");	
-				}*/
 				
 			}	
 		}

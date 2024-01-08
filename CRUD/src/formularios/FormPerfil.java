@@ -8,8 +8,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 //import javax.swing.JOptionPane;
-
-import com.toedter.calendar.JDateChooser;
+import javax.swing.JOptionPane;
 
 import bean.Usuario;
 import mantenimiento.GestionUsuario;
@@ -18,7 +17,6 @@ import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionListener;
-import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
 
 public class FormPerfil extends JFrame {
@@ -52,6 +50,7 @@ public class FormPerfil extends JFrame {
 	 * Create the frame.
 	 */
 	public FormPerfil() {
+		setResizable(false);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 325);
@@ -105,18 +104,14 @@ public class FormPerfil extends JFrame {
 		txtApellidos.setBounds(289, 179, 100, 20);
 		contentPane.add(txtApellidos);
 		
-		JDateChooser jdc_Fecha = new JDateChooser();
-		jdc_Fecha.setBounds(255, 234, 120, 20);
-		contentPane.add(jdc_Fecha);
-		
 		JLabel lblFecha = new JLabel("Fecha de Nacimiento:");
-		lblFecha.setBounds(30, 237, 115, 14);
+		lblFecha.setBounds(100, 237, 115, 14);
 		contentPane.add(lblFecha);
 		
 		txtFecha = new JTextField();
 		txtFecha.setEditable(false);
 		txtFecha.setColumns(10);
-		txtFecha.setBounds(155, 234, 100, 20);
+		txtFecha.setBounds(230, 234, 100, 20);
 		contentPane.add(txtFecha);
 		
 		JButton btnEliminar = new JButton("Eliminar");
@@ -138,22 +133,24 @@ public class FormPerfil extends JFrame {
 				String name = txtNombre.getText();
 				String lastname = txtApellidos.getText();
 				String fecha;
-				SimpleDateFormat f = new SimpleDateFormat ("yyyy-MM-dd");
-				//fecha = f.format(jdc_Fecha.getDate());
 				int Id = usuario2.getId_cliente();
 				fecha = txtFecha.getText();
 				String tfno = txtTfno.getText();
 				String dni = txtDNI.getText();
-				
-				//GestionUsuario gestionUsuario = new GestionUsuario();
+
 				long tfno_usuario = Long.parseLong(tfno);
 				long dni_usuario = Long.parseLong(dni);
-				
-				//Usuario usuario3 = new Usuario();
 				usuario2.setDni(dni_usuario);
 				
-				
+		
 				GestionUsuario regisUsuario = new GestionUsuario();
+				
+				boolean existe = regisUsuario.usuarioDNIExiste(dni_usuario);
+
+				if (existe) {
+					JOptionPane.showMessageDialog(contentPane, "Este DNI ya esta en uso.", "Error", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
 				
  				Usuario usuario2 = new Usuario();
 				usuario2.setDni(dni_usuario);
@@ -164,12 +161,8 @@ public class FormPerfil extends JFrame {
 				usuario2.setId_cliente(Id);
 				regisUsuario.UsuarioUpdate(usuario2);
 				
-				/*if (usu!=null) {
-					JOptionPane.showMessageDialog(contentPane, "Este DNI ya esta en uso.", "Error", JOptionPane.ERROR_MESSAGE);
-
-				} else {
-					regisUsuario.UsuarioUpdate(usuario2);
-					JOptionPane.showMessageDialog(contentPane, "¡Usuario Registrado Correctamente!");	*/
+				btnGuardar.setEnabled(false);
+				
 				}
 				
 			}
@@ -179,6 +172,7 @@ public class FormPerfil extends JFrame {
 		contentPane.add(btnGuardar);
 		
 		JButton btnEditar = new JButton("Editar");
+		btnEditar.setEnabled(false);
 		btnEditar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Editar();
@@ -202,11 +196,9 @@ public class FormPerfil extends JFrame {
 		btnDatos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Datos();
-				/*String fecha;
-				SimpleDateFormat f = new SimpleDateFormat ("d MMM y");
-				fecha = f.format(usuario2.getFecha());
-				jdc_Fecha.setDateFormatString(fecha);*/
-			}
+				btnEliminar.setEnabled(true);
+				btnEditar.setEnabled(true);
+							}
 		});
 		btnDatos.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnDatos.setBounds(314, 12, 110, 43);
@@ -214,7 +206,14 @@ public class FormPerfil extends JFrame {
 	}
 
 	protected void Eliminar() {
-		// TODO Auto-generated method stub
+		int Id = usuario2.getId_cliente();
+		GestionUsuario delete = new GestionUsuario();
+
+		Usuario usuario3 = new Usuario();
+		
+		usuario3.setId_cliente(Id);
+		
+		delete.UsuarioDelete(usuario3);
 		
 	}
 
@@ -237,6 +236,7 @@ public class FormPerfil extends JFrame {
 
 	protected void Back() {
 		FormPrincipal principal = new FormPrincipal();
+		principal.usuario2 = usuario2;
 		principal.setVisible(true);
 		this.dispose();
 		
