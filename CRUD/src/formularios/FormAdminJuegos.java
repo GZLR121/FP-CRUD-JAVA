@@ -72,12 +72,14 @@ public class FormAdminJuegos extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel contentPane_1 = new JPanel();
+		contentPane_1.setBackground(new Color(0, 51, 102));
 		contentPane_1.setLayout(null);
 		contentPane_1.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane_1.setBounds(0, 0, 459, 291);
 		contentPane.add(contentPane_1);
 		
 		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.setBackground(new Color(153, 255, 255));
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -105,11 +107,15 @@ public class FormAdminJuegos extends JFrame {
 		contentPane_1.add(txtNombre);
 		
 		JLabel lblNombre = new JLabel("Nombre:");
-		lblNombre.setBounds(89, 98, 46, 14);
+		lblNombre.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNombre.setForeground(new Color(255, 255, 255));
+		lblNombre.setBounds(80, 98, 55, 14);
 		contentPane_1.add(lblNombre);
 		
 		JLabel lblCodigo = new JLabel("Codigo:");
-		lblCodigo.setBounds(89, 154, 46, 14);
+		lblCodigo.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblCodigo.setForeground(new Color(255, 255, 255));
+		lblCodigo.setBounds(80, 154, 55, 14);
 		contentPane_1.add(lblCodigo);
 		
 		txtCodigo = new JTextField();
@@ -119,7 +125,9 @@ public class FormAdminJuegos extends JFrame {
 		contentPane_1.add(txtCodigo);
 		
 		JLabel lblPrecio_1 = new JLabel("Precio:");
-		lblPrecio_1.setBounds(255, 154, 40, 14);
+		lblPrecio_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblPrecio_1.setForeground(new Color(255, 255, 255));
+		lblPrecio_1.setBounds(245, 154, 50, 14);
 		contentPane_1.add(lblPrecio_1);
 		
 		txtPrecio = new JTextField();
@@ -129,7 +137,9 @@ public class FormAdminJuegos extends JFrame {
 		contentPane_1.add(txtPrecio);
 		
 		JLabel lblPrecio = new JLabel("RFC del Proveedor:");
-		lblPrecio.setBounds(114, 199, 103, 14);
+		lblPrecio.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblPrecio.setForeground(new Color(255, 255, 255));
+		lblPrecio.setBounds(100, 199, 115, 14);
 		contentPane_1.add(lblPrecio);
 		
 		txtRFC = new JTextField();
@@ -139,6 +149,7 @@ public class FormAdminJuegos extends JFrame {
 		contentPane_1.add(txtRFC);
 		
 		btnAgregar = new JButton("Agregar");
+		btnAgregar.setBackground(new Color(153, 255, 255));
 		btnAgregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Agregar();
@@ -149,6 +160,7 @@ public class FormAdminJuegos extends JFrame {
 		contentPane_1.add(btnAgregar);
 		
 		JButton btnBack = new JButton("<");
+		btnBack.setBackground(new Color(153, 255, 255));
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Back();
@@ -165,11 +177,12 @@ public class FormAdminJuegos extends JFrame {
 			}
 		});
 		btnEliminar.setEnabled(false);
-		btnEliminar.setBackground(new Color(255, 0, 0));
+		btnEliminar.setBackground(new Color(255, 51, 51));
 		btnEliminar.setBounds(360, 257, 89, 23);
 		contentPane_1.add(btnEliminar);
 		
 		btnEditar = new JButton("Editar");
+		btnEditar.setBackground(new Color(153, 255, 255));
 		btnEditar.setEnabled(false);
 		btnEditar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -181,6 +194,7 @@ public class FormAdminJuegos extends JFrame {
 		contentPane_1.add(btnEditar);
 		
 		btnGuardar = new JButton("Guardar");
+		btnGuardar.setBackground(new Color(153, 255, 255));
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Guardar();	
@@ -192,6 +206,7 @@ public class FormAdminJuegos extends JFrame {
 		contentPane_1.add(btnGuardar);
 		
 		JButton btnHab_Lim = new JButton("Habilitar / Limpiar");
+		btnHab_Lim.setBackground(new Color(153, 255, 255));
 		btnHab_Lim.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				hab();
@@ -271,12 +286,18 @@ public class FormAdminJuegos extends JFrame {
 			juegos.setPrecio(Precio);
 			juegos.setRFC(RFC);
 			
-			insert.JuegosInsert(juegos);
+			boolean existe = insert.CodigoExiste(Codigo);
+
+			if (existe) {
+				JOptionPane.showMessageDialog(contentPane, "Este Codigo ya esta en uso.", "Error", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
 			
+			insert.JuegosInsert(juegos);		
 		}
 
 		protected void Eliminar() {
-			Integer Codigo = juegos.getCodigo();
+			Integer Codigo = Integer.parseInt(txtCodigo.getText());
 			GestionJuegos delete = new GestionJuegos();
 
 			juegos = new Juegos();
@@ -284,6 +305,10 @@ public class FormAdminJuegos extends JFrame {
 			juegos.setCodigo(Codigo);
 			
 			delete.JuegosDelete(juegos);
+			txtNombre.setText("");
+			txtPrecio.setText("");
+			txtRFC.setText("");
+			txtCodigo.setText("");
 			
 		}
 

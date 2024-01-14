@@ -6,8 +6,9 @@ public class Juegos {
 	private String Nombre;
 	private int Precio;
 	private String RFC;
+	private boolean eliminado;
 	
-	public Juegos(int codigo, String nombre, int precio, String rFC) {
+	public Juegos(int codigo, String nombre, int precio, String rFC, boolean eliminado) {
 		super();
 		Codigo = codigo;
 		Nombre = nombre;
@@ -58,4 +59,12 @@ public class Juegos {
 	public String toString() {
 		return getNombre();
 		}
+
+	public boolean isEliminado() {
+		return eliminado;
+	}
+
+	public void setEliminado(boolean eliminado) {
+		this.eliminado = eliminado;
+	}
 }

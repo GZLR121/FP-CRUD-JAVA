@@ -8,8 +8,9 @@ public class Usuario {
 	private String fecha;
 	private Long tfno;
 	private Integer id_cliente;
+	private boolean eliminado;
 
-	public Usuario(Long dni, String nombre, String apellidos, String fecha ,Long tfno, Integer id_cliente) {
+	public Usuario(Long dni, String nombre, String apellidos, String fecha ,Long tfno, Integer id_cliente, boolean eliminado) {
 
 		this.dni = dni;
 		this.nombre = nombre;
@@ -69,6 +70,14 @@ public class Usuario {
 
 	public void setId_cliente(Integer id_cliente) {
 		this.id_cliente = id_cliente;
+	}
+
+	public boolean isEliminado() {
+		return eliminado;
+	}
+
+	public void setEliminado(boolean eliminado) {
+		this.eliminado = eliminado;
 	}
 
 }

@@ -4,8 +4,9 @@ public class Proveedor {
 	private String rfc;
 	private String nombre;
 	private String direccion;
+	private boolean eliminado;
 	
-	public Proveedor(String rfc, String nombre, String direccion) {
+	public Proveedor(String rfc, String nombre, String direccion, boolean eliminado) {
 		super();
 		this.rfc = rfc;
 		this.nombre = nombre;
@@ -38,6 +39,14 @@ public class Proveedor {
 
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
+	}
+
+	public boolean isEliminado() {
+		return eliminado;
+	}
+
+	public void setEliminado(boolean eliminado) {
+		this.eliminado = eliminado;
 	}
 	
 

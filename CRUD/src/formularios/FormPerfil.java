@@ -50,11 +50,13 @@ public class FormPerfil extends JFrame {
 	 * Create the frame.
 	 */
 	public FormPerfil() {
+		setTitle("Perfil");
 		setResizable(false);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 325);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(0, 51, 102));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
@@ -68,11 +70,15 @@ public class FormPerfil extends JFrame {
 		txtDNI.setColumns(10);
 		
 		JLabel lblDNI = new JLabel("DNI:");
+		lblDNI.setForeground(new Color(255, 255, 255));
+		lblDNI.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblDNI.setBounds(55, 123, 46, 14);
 		contentPane.add(lblDNI);
 		
 		JLabel lblTfno = new JLabel("Telefono:");
-		lblTfno.setBounds(233, 123, 46, 14);
+		lblTfno.setForeground(new Color(255, 255, 255));
+		lblTfno.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblTfno.setBounds(220, 123, 60, 14);
 		contentPane.add(lblTfno);
 		
 		txtTfno = new JTextField();
@@ -83,7 +89,9 @@ public class FormPerfil extends JFrame {
 		contentPane.add(txtTfno);
 		
 		JLabel lblNombre = new JLabel("Nombre:");
-		lblNombre.setBounds(44, 182, 55, 14);
+		lblNombre.setForeground(new Color(255, 255, 255));
+		lblNombre.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNombre.setBounds(40, 182, 60, 14);
 		contentPane.add(lblNombre);
 		
 		txtNombre = new JTextField();
@@ -94,7 +102,9 @@ public class FormPerfil extends JFrame {
 		contentPane.add(txtNombre);
 		
 		JLabel lblApellidos = new JLabel("Apellidos:");
-		lblApellidos.setBounds(230, 182, 55, 14);
+		lblApellidos.setForeground(new Color(255, 255, 255));
+		lblApellidos.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblApellidos.setBounds(220, 182, 65, 14);
 		contentPane.add(lblApellidos);
 		
 		txtApellidos = new JTextField();
@@ -105,7 +115,9 @@ public class FormPerfil extends JFrame {
 		contentPane.add(txtApellidos);
 		
 		JLabel lblFecha = new JLabel("Fecha de Nacimiento:");
-		lblFecha.setBounds(100, 237, 115, 14);
+		lblFecha.setForeground(new Color(255, 255, 255));
+		lblFecha.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblFecha.setBounds(95, 237, 130, 14);
 		contentPane.add(lblFecha);
 		
 		txtFecha = new JTextField();
@@ -122,11 +134,12 @@ public class FormPerfil extends JFrame {
 			}
 			
 		});
-		btnEliminar.setBackground(new Color(255, 0, 0));
+		btnEliminar.setBackground(new Color(255, 51, 51));
 		btnEliminar.setBounds(286, 75, 89, 23);
 		contentPane.add(btnEliminar);
 		
 		JButton btnGuardar = new JButton("Guardar");
+		btnGuardar.setBackground(new Color(153, 255, 255));
 		btnGuardar.setEnabled(false);
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -145,7 +158,7 @@ public class FormPerfil extends JFrame {
 		
 				GestionUsuario regisUsuario = new GestionUsuario();
 				
-				boolean existe = regisUsuario.usuarioDNIExiste(dni_usuario);
+				boolean existe = regisUsuario.usuarioDNIExiste(dni_usuario, Id);
 
 				if (existe) {
 					JOptionPane.showMessageDialog(contentPane, "Este DNI ya esta en uso.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -172,6 +185,7 @@ public class FormPerfil extends JFrame {
 		contentPane.add(btnGuardar);
 		
 		JButton btnEditar = new JButton("Editar");
+		btnEditar.setBackground(new Color(153, 255, 255));
 		btnEditar.setEnabled(false);
 		btnEditar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -183,6 +197,7 @@ public class FormPerfil extends JFrame {
 		contentPane.add(btnEditar);
 		
 		JButton btnBack = new JButton("<");
+		btnBack.setBackground(new Color(153, 255, 255));
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Back();
@@ -193,6 +208,7 @@ public class FormPerfil extends JFrame {
 		contentPane.add(btnBack);
 		
 		JButton btnDatos = new JButton("Mostrar Datos");
+		btnDatos.setBackground(new Color(153, 255, 255));
 		btnDatos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Datos();

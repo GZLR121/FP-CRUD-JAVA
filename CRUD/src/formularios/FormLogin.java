@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
+import java.awt.Color;
 
 public class FormLogin extends JFrame {
 
@@ -44,21 +45,25 @@ public class FormLogin extends JFrame {
 	 * Create the frame.
 	 */
 	public FormLogin() {
+		setTitle("Log In");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(0, 51, 102));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblTfno = new JLabel("Telefono:");
+		lblTfno.setForeground(new Color(255, 255, 255));
 		lblTfno.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblTfno.setBounds(97, 69, 70, 14);
 		contentPane.add(lblTfno);
 		
 		JLabel lblDNI = new JLabel("DNI:");
+		lblDNI.setForeground(new Color(255, 255, 255));
 		lblDNI.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblDNI.setBounds(115, 111, 42, 14);
 		contentPane.add(lblDNI);
@@ -69,6 +74,8 @@ public class FormLogin extends JFrame {
 		txtTfno.setColumns(10);
 		
 		JButton btnINGRESAR = new JButton("INGRESAR");
+		btnINGRESAR.setBackground(new Color(153, 255, 255));
+		btnINGRESAR.setFont(new Font("Tahoma", Font.BOLD, 10));
 		btnINGRESAR.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ingresar();
@@ -78,6 +85,8 @@ public class FormLogin extends JFrame {
 		contentPane.add(btnINGRESAR);
 		
 		JButton btnREGISTRAR = new JButton("REGISTRAR");
+		btnREGISTRAR.setBackground(new Color(153, 255, 255));
+		btnREGISTRAR.setFont(new Font("Tahoma", Font.BOLD, 10));
 		btnREGISTRAR.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				registrar();
