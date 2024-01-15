@@ -23,6 +23,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 
 public class FormJuegos extends JFrame {
@@ -58,50 +59,59 @@ public class FormJuegos extends JFrame {
 	 * Create the frame.
 	 */
 	public FormJuegos() {
+		setResizable(false);
 		setTitle("Juegos");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 475, 330);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(0, 51, 102));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.setBackground(new Color(153, 255, 255));
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Buscar();
 			}
 		});
-		btnBuscar.setBounds(299, 11, 90, 23);
+		btnBuscar.setBounds(299, 22, 90, 23);
 		contentPane.add(btnBuscar);
 		
 		cb_Juegos = new JComboBox<String>();
-		cb_Juegos.setBounds(89, 11, 180, 22);
+		cb_Juegos.setBounds(89, 22, 180, 22);
 		contentPane.add(cb_Juegos);
 		
 		txtNombre = new JTextField();
 		txtNombre.setEditable(false);
-		txtNombre.setBounds(171, 87, 218, 20);
+		txtNombre.setBounds(145, 87, 244, 20);
 		contentPane.add(txtNombre);
 		txtNombre.setColumns(10);
 		
 		JLabel lblNombre = new JLabel("Nombre:");
-		lblNombre.setBounds(89, 90, 46, 14);
+		lblNombre.setForeground(new Color(255, 255, 255));
+		lblNombre.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNombre.setBounds(80, 90, 55, 14);
 		contentPane.add(lblNombre);
 		
 		JLabel lblCodigo = new JLabel("Codigo:");
-		lblCodigo.setBounds(89, 146, 46, 14);
+		lblCodigo.setForeground(new Color(255, 255, 255));
+		lblCodigo.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblCodigo.setBounds(84, 146, 55, 14);
 		contentPane.add(lblCodigo);
 		
 		txtCodigo = new JTextField();
 		txtCodigo.setEditable(false);
 		txtCodigo.setColumns(10);
-		txtCodigo.setBounds(140, 143, 90, 20);
+		txtCodigo.setBounds(145, 143, 85, 20);
 		contentPane.add(txtCodigo);
 		
 		JLabel lblPrecio_1 = new JLabel("Precio:");
-		lblPrecio_1.setBounds(255, 146, 40, 14);
+		lblPrecio_1.setForeground(new Color(255, 255, 255));
+		lblPrecio_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblPrecio_1.setBounds(243, 146, 50, 14);
 		contentPane.add(lblPrecio_1);
 		
 		txtPrecio = new JTextField();
@@ -111,7 +121,9 @@ public class FormJuegos extends JFrame {
 		contentPane.add(txtPrecio);
 		
 		JLabel lblPrecio = new JLabel("RFC del Proveedor:");
-		lblPrecio.setBounds(114, 191, 103, 14);
+		lblPrecio.setForeground(new Color(255, 255, 255));
+		lblPrecio.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblPrecio.setBounds(100, 191, 115, 14);
 		contentPane.add(lblPrecio);
 		
 		txtRFC = new JTextField();
@@ -121,15 +133,17 @@ public class FormJuegos extends JFrame {
 		contentPane.add(txtRFC);
 		
 		JButton btnAdministar = new JButton("Administrar");
+		btnAdministar.setBackground(new Color(153, 255, 255));
 		btnAdministar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Admin();
 			}
 		});
-		btnAdministar.setBounds(10, 257, 89, 23);
+		btnAdministar.setBounds(10, 257, 100, 23);
 		contentPane.add(btnAdministar);
 		
 		JButton btnBack = new JButton("<");
+		btnBack.setBackground(new Color(153, 255, 255));
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Back();
@@ -140,12 +154,13 @@ public class FormJuegos extends JFrame {
 		contentPane.add(btnBack);
 		
 		JButton btnComprar = new JButton("Comprar");
+		btnComprar.setBackground(new Color(153, 255, 153));
 		btnComprar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				comprar();
 			}
 		});
-		btnComprar.setBounds(360, 257, 89, 23);
+		btnComprar.setBounds(349, 257, 100, 23);
 		contentPane.add(btnComprar);
 		
 		cargarJuegos();

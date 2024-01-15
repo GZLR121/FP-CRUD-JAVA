@@ -3,6 +3,7 @@ package formularios;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -11,6 +12,8 @@ import bean.Usuario;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
+import java.awt.Font;
 
 public class FormPrincipal extends JFrame {
 
@@ -47,12 +50,15 @@ public class FormPrincipal extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(0, 51, 102));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JButton btnJuegos = new JButton("Juegos");
+		btnJuegos.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnJuegos.setBackground(new Color(153, 255, 255));
 		btnJuegos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -64,6 +70,8 @@ public class FormPrincipal extends JFrame {
 		contentPane.add(btnJuegos);
 		
 		JButton btnPerfil = new JButton("Perfil");
+		btnPerfil.setFont(new Font("Tahoma", Font.BOLD, 10));
+		btnPerfil.setBackground(new Color(153, 255, 255));
 		btnPerfil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				perfil();
@@ -73,6 +81,8 @@ public class FormPrincipal extends JFrame {
 		contentPane.add(btnPerfil);
 		
 		JButton btnProv = new JButton("Proveedores");
+		btnProv.setFont(new Font("Tahoma", Font.BOLD, 10));
+		btnProv.setBackground(new Color(153, 255, 255));
 		btnProv.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				provedores();
@@ -82,6 +92,9 @@ public class FormPrincipal extends JFrame {
 		contentPane.add(btnProv);
 		
 		JButton btnLogOut = new JButton("Log Out");
+		btnLogOut.setForeground(new Color(255, 255, 255));
+		btnLogOut.setBackground(new Color(255, 51, 51));
+		btnLogOut.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnLogOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				LogOut();
@@ -91,6 +104,9 @@ public class FormPrincipal extends JFrame {
 		contentPane.add(btnLogOut);
 		
 		JButton btnSalir = new JButton("Salir");
+		btnSalir.setForeground(new Color(255, 255, 255));
+		btnSalir.setBackground(new Color(255, 51, 51));
+		btnSalir.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Salir();
@@ -112,9 +128,11 @@ public class FormPrincipal extends JFrame {
 		System.exit(0);
 	}
 	protected void LogOut() {
+		
 		FormLogin login = new FormLogin();
 		login.setVisible(true);
 		this.dispose();
+		JOptionPane.showMessageDialog(contentPane, "Sesion cerrada exitosamente", "Log Out Success", JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	protected void perfil() {

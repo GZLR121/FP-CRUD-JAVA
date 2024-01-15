@@ -3,6 +3,8 @@ package mantenimiento;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+//import java.util.ArrayList;
+//import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -37,7 +39,7 @@ public class GestionVentas {
 		}
 		return venta;
 }
-	public boolean VentaExiste(Integer cod, Integer Id) {
+	public boolean VentaExiste(Integer Id, Integer cod) {
 		boolean existe = false;
 		
 		try {
@@ -47,7 +49,7 @@ public class GestionVentas {
 				
 		 con = MySQLConexion.getConexion();
 		 
-		 String sql = "SELECT * FROM producto WHERE id_cliente = ? AND codigo = ?";
+		 String sql = "SELECT * FROM ventas WHERE id_cliente = ? AND codigo = ?";
 		 
 		 pst = con.prepareStatement(sql);
 		 
@@ -67,4 +69,35 @@ public class GestionVentas {
 		
 		return existe;
 	}
+	/*public List<Ventas> getVentas() {
+		List<Ventas> ventas_lista = new ArrayList<>();
+		Ventas ventas = null;
+		
+		Connection con = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		
+		try {
+			
+		 con = MySQLConexion.getConexion();
+		 
+		 String sql = "SELECT codigo FROM producto WHERE id_cliente = ";
+		 
+		 pst = con.prepareStatement(sql);
+		  
+		 rs = pst.executeQuery();
+		 
+		 while(rs.next()) {
+			 ventas = new Ventas();
+
+			 ventas.setCodigo(null);
+
+			 ventas_lista.add(ventas);
+		 }
+		
+		}catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Error al obtener nombres de los juegos", "Error", JOptionPane.ERROR_MESSAGE);
+		}
+		return ventas_lista;
+}*/
 }

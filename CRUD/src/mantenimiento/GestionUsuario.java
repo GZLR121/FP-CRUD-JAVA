@@ -23,7 +23,7 @@ public Usuario obtenerUsuario(Usuario usu) {
 		
 	 con = MySQLConexion.getConexion();
 	 
-	 String sql = "SELECT * FROM cliente WHERE dni = ? and tfno = ?";
+	 String sql = "SELECT * FROM cliente WHERE dni = ? and tfno = ? and eliminado = 0";
 	 
 	 pst = con.prepareStatement(sql);
 	 
@@ -33,15 +33,8 @@ public Usuario obtenerUsuario(Usuario usu) {
 	 rs = pst.executeQuery();
 	 
 	 while(rs.next()) {
-		 /*
-		 Long col_DNI = rs.getLong(1);
-		 String col_Name = rs.getString(2);
-		 String col_App = rs.getString(3);
-		 String col_Fecha = rs.getString(4);
-		 Long col_Tel = rs.getLong(5);
-		 Integer col_Id = rs.getInt(6);
-		 */
-		 usuario = new Usuario(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getLong(5), rs.getInt(6));
+
+		 usuario = new Usuario(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getLong(5), rs.getInt(6), rs.getBoolean(7));
 	 }
 	
 	}catch (Exception e) {
@@ -51,7 +44,7 @@ public Usuario obtenerUsuario(Usuario usu) {
 	
 }
 
-public boolean usuarioDNIExiste(Long dni) {
+public boolean usuarioDNIExiste(Long dni, int id) {
 	boolean existe = false;
 	
 	try {
@@ -61,11 +54,12 @@ public boolean usuarioDNIExiste(Long dni) {
 			
 	 con = MySQLConexion.getConexion();
 	 
-	 String sql = "SELECT * FROM cliente WHERE dni = ?";
+	 String sql = "SELECT * FROM cliente WHERE dni = ? and id_cliente <> ?";
 	 
 	 pst = con.prepareStatement(sql);
 	 
 	 pst.setLong(1, dni);
+	 pst.setInt(2, id);
 	 
 	 rs = pst.executeQuery();
 	 
@@ -154,7 +148,7 @@ public Usuario UsuarioDelete(Usuario usu) {
 		
 	 con = MySQLConexion.getConexion();
 	 
-	 String sql = "DELETE FROM cliente WHERE id_cliente = ?";
+	 String sql = "UPDATE cliente SET eliminado = 1 WHERE id_cliente = ?";
 	 
 	 pst = con.prepareStatement(sql);
 	 pst.setInt(1, usu.getId_cliente());

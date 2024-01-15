@@ -19,6 +19,7 @@ import com.toedter.calendar.JDateChooser;
 
 import bean.Usuario;
 import mantenimiento.GestionUsuario;
+import java.awt.Color;
 
 public class FormRegistroCliente extends JFrame {
 
@@ -51,16 +52,19 @@ public class FormRegistroCliente extends JFrame {
 	 * @param <Date>
 	 */
 	public <Date> FormRegistroCliente() {
+		setTitle("Registro");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 320);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(0, 51, 102));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblNombre = new JLabel("Nombre:");
+		lblNombre.setForeground(new Color(255, 255, 255));
 		lblNombre.setBounds(87, 34, 54, 16);
 		lblNombre.setFont(new Font("Tahoma", Font.BOLD, 13));
 		contentPane.add(lblNombre);
@@ -71,6 +75,7 @@ public class FormRegistroCliente extends JFrame {
 		txtNombre.setColumns(10);
 		
 		JLabel lblApellidos = new JLabel("Apellidos:");
+		lblApellidos.setForeground(new Color(255, 255, 255));
 		lblApellidos.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblApellidos.setBounds(87, 82, 70, 16);
 		contentPane.add(lblApellidos);
@@ -81,6 +86,7 @@ public class FormRegistroCliente extends JFrame {
 		contentPane.add(txtApellidos);
 		
 		JLabel lblTfno = new JLabel("Telefono:");
+		lblTfno.setForeground(new Color(255, 255, 255));
 		lblTfno.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblTfno.setBounds(87, 213, 65, 16);
 		contentPane.add(lblTfno);
@@ -91,6 +97,7 @@ public class FormRegistroCliente extends JFrame {
 		contentPane.add(txtTfno);
 		
 		JLabel lblDNI = new JLabel("DNI:");
+		lblDNI.setForeground(new Color(255, 255, 255));
 		lblDNI.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblDNI.setBounds(100, 169, 30, 16);
 		contentPane.add(lblDNI);
@@ -101,6 +108,7 @@ public class FormRegistroCliente extends JFrame {
 		contentPane.add(txtDNI);
 		
 		JLabel lblFecha_cum = new JLabel("Fecha de nacimiento:");
+		lblFecha_cum.setForeground(new Color(255, 255, 255));
 		lblFecha_cum.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblFecha_cum.setBounds(45, 126, 140, 16);
 		contentPane.add(lblFecha_cum);
@@ -110,6 +118,7 @@ public class FormRegistroCliente extends JFrame {
 		contentPane.add(jdc_fecha);
 		
 		JButton btnRegistrar = new JButton("Registrar");
+		btnRegistrar.setBackground(new Color(153, 255, 255));
 		btnRegistrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -121,15 +130,14 @@ public class FormRegistroCliente extends JFrame {
 				
 				String tfno = txtTfno.getText();
 				String dni = txtDNI.getText();
+				int id = 0;
 				
 				GestionUsuario gestionUsuario = new GestionUsuario();
 				long tfno_usuario = Long.parseLong(tfno);
 				long dni_usuario = Long.parseLong(dni);
 				
-				Usuario usuario2 = new Usuario();
-				usuario2.setDni(dni_usuario);
 				
-				boolean existe = gestionUsuario.usuarioDNIExiste(dni_usuario);
+				boolean existe = gestionUsuario.usuarioDNIExiste(dni_usuario, id);
 
 				if (existe) {
 					JOptionPane.showMessageDialog(contentPane, "Este DNI ya esta en uso.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -154,6 +162,7 @@ public class FormRegistroCliente extends JFrame {
 		contentPane.add(btnRegistrar);
 		
 		JButton btnBack = new JButton("<");
+		btnBack.setBackground(new Color(153, 255, 255));
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Back();

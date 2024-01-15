@@ -56,12 +56,14 @@ public class FormProveedores extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(0, 51, 102));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JButton btnGuardar = new JButton("Guardar");
+		btnGuardar.setBackground(new Color(153, 255, 255));
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Guardar();	
@@ -73,6 +75,7 @@ public class FormProveedores extends JFrame {
 		contentPane.add(btnGuardar);
 		
 		JButton btnEditar = new JButton("Editar");
+		btnEditar.setBackground(new Color(153, 255, 255));
 		btnEditar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				txtNombre.setEditable(true);
@@ -92,7 +95,7 @@ public class FormProveedores extends JFrame {
 			}
 		});
 		btnEliminar.setEnabled(false);
-		btnEliminar.setBackground(Color.RED);
+		btnEliminar.setBackground(new Color(255, 51, 51));
 		btnEliminar.setBounds(328, 75, 89, 23);
 		contentPane.add(btnEliminar);
 		
@@ -103,10 +106,14 @@ public class FormProveedores extends JFrame {
 		contentPane.add(txtRFC);
 		
 		JLabel lblDNI = new JLabel("RFC:");
+		lblDNI.setForeground(new Color(255, 255, 255));
+		lblDNI.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblDNI.setBounds(52, 133, 46, 14);
 		contentPane.add(lblDNI);
 		
 		JLabel lblTfno = new JLabel("Nombre:");
+		lblTfno.setForeground(new Color(255, 255, 255));
+		lblTfno.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblTfno.setBounds(195, 133, 55, 14);
 		contentPane.add(lblTfno);
 		
@@ -117,6 +124,7 @@ public class FormProveedores extends JFrame {
 		contentPane.add(txtNombre);
 		
 		JButton btnAgregar = new JButton("Agregar");
+		btnAgregar.setBackground(new Color(153, 255, 255));
 		btnAgregar.setEnabled(false);
 		btnAgregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -127,6 +135,8 @@ public class FormProveedores extends JFrame {
 		contentPane.add(btnAgregar);
 		
 		JLabel lblDireccion = new JLabel("Direccion:");
+		lblDireccion.setForeground(new Color(255, 255, 255));
+		lblDireccion.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblDireccion.setBounds(84, 178, 60, 14);
 		contentPane.add(lblDireccion);
 		
@@ -137,6 +147,7 @@ public class FormProveedores extends JFrame {
 		contentPane.add(txtDireccion);
 		
 		JButton btnBack = new JButton("<");
+		btnBack.setBackground(new Color(153, 255, 255));
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Back();
@@ -152,6 +163,7 @@ public class FormProveedores extends JFrame {
 		txtBuscar.setColumns(10);
 		
 		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.setBackground(new Color(153, 255, 255));
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Buscar();
@@ -167,6 +179,7 @@ public class FormProveedores extends JFrame {
 		contentPane.add(btnBuscar);
 		
 		JButton btnLimpiar = new JButton("Habilitar / Limpiar");
+		btnLimpiar.setBackground(new Color(153, 255, 255));
 		btnLimpiar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				txtRFC.setText("");
@@ -217,6 +230,9 @@ public class FormProveedores extends JFrame {
 		proveedor.setRfc(RFC);
 		
 		delete.ProveedorDelete(proveedor);
+		txtRFC.setText("");
+		txtNombre.setText("");
+		txtDireccion.setText("");
 		
 	}
 

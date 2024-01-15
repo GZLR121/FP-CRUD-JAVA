@@ -22,7 +22,7 @@ public class GestionProveedor {
 			
 		 con = MySQLConexion.getConexion();
 		 
-		 String sql = "SELECT * FROM proveedor WHERE rfc = ?";
+		 String sql = "SELECT * FROM proveedor WHERE rfc = ? and eliminado = 0";
 		 
 		 pst = con.prepareStatement(sql);
 		 
@@ -31,7 +31,7 @@ public class GestionProveedor {
 		 rs = pst.executeQuery();
 		 
 		 while(rs.next()) {
-			 proveedor = new Proveedor(rs.getString(1), rs.getString(2), rs.getString(3));
+			 proveedor = new Proveedor(rs.getString(1), rs.getString(2), rs.getString(3), rs.getBoolean(4));
 		 }
 		
 		}catch (Exception e) {
@@ -105,7 +105,7 @@ public class GestionProveedor {
 				
 			 con = MySQLConexion.getConexion();
 			 
-			 String sql = "DELETE FROM proveedor WHERE rfc = ?";
+			 String sql = "UPDATE proveedor SET eliminado = 1 WHERE rfc = ?";
 			 
 			 
 			 pst = con.prepareStatement(sql);

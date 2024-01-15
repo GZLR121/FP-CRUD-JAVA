@@ -33,8 +33,7 @@ public class GestionJuegos {
 		 rs = pst.executeQuery();
 		 
 		 while(rs.next()) {
-			 juego = new Juegos(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4));
-		 }
+			 juego = new Juegos(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getBoolean(5));	 }
 		
 		}catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Error al obtener el juego", "Error", JOptionPane.ERROR_MESSAGE);
@@ -53,7 +52,7 @@ public class GestionJuegos {
 			
 		 con = MySQLConexion.getConexion();
 		 
-		 String sql = "SELECT nombre FROM producto";
+		 String sql = "SELECT nombre FROM producto WHERE eliminado = 0";
 		 
 		 pst = con.prepareStatement(sql);
 		  
@@ -144,7 +143,7 @@ public class GestionJuegos {
 				
 			 con = MySQLConexion.getConexion();
 			 
-			 String sql = "DELETE FROM producto WHERE codigo = ?";
+			 String sql = "UPDATE producto SET eliminado = 1 WHERE codigo = ?";
 			 
 			 pst = con.prepareStatement(sql);
 
