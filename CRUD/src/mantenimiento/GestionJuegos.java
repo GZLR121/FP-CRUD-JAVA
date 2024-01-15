@@ -187,4 +187,38 @@ public class GestionJuegos {
 			
 			return existe;
 		}
+		public Juegos JuegoRecovery(Juegos game) {
+			Juegos juego = null;
+			
+			Connection con = null;
+			PreparedStatement pst = null;
+			ResultSet rs = null;
+			
+			try {
+				
+			 con = MySQLConexion.getConexion();
+			 
+			 String sql = "SELECT * FROM producto WHERE codigo = ? and eliminado = 1;";
+			 
+			 pst = con.prepareStatement(sql);
+			 
+			 pst.setInt(1, game.getCodigo());
+			 
+			 rs = pst.executeQuery();
+			 
+			 while(rs.next()) {
+				 String sql2 = "UPDATE producto SET eliminado = 0 WHERE codigo = ?";
+				 
+				 pst = con.prepareStatement(sql2);
+				 pst.setInt(1, game.getCodigo());
+				 
+				 pst.execute();
+				 JOptionPane.showMessageDialog(null, "Juego Recuperado Exitosamene", "Success", JOptionPane.INFORMATION_MESSAGE);	
+				 }
+			
+			}catch (Exception e) {
+				JOptionPane.showMessageDialog(null, "Error al obtener el juego", "Error", JOptionPane.ERROR_MESSAGE);
+			}
+			return juego;
+	}
 }

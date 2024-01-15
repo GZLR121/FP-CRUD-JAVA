@@ -194,8 +194,26 @@ public class FormProveedores extends JFrame {
 				btnGuardar.setEnabled(false);
 			}
 		});
-		btnLimpiar.setBounds(267, 227, 150, 23);
+		btnLimpiar.setBounds(257, 227, 160, 23);
 		contentPane.add(btnLimpiar);
+		
+		JButton btnRecuperarProveedor = new JButton("Recuperar Proveedor");
+		btnRecuperarProveedor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Recovery();
+			}
+		});
+		btnRecuperarProveedor.setBackground(new Color(153, 255, 255));
+		btnRecuperarProveedor.setBounds(10, 227, 160, 23);
+		contentPane.add(btnRecuperarProveedor);
+	}
+
+	protected void Recovery() {
+		FormRProveedor RProveedor = new FormRProveedor();
+		RProveedor.usuario2 = usuario2;
+		RProveedor.setVisible(true);
+		this.dispose();
+		
 	}
 
 	protected void Agregar() {
