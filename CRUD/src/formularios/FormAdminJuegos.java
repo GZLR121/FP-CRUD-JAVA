@@ -39,6 +39,7 @@ public class FormAdminJuegos extends JFrame {
 	
 	public Juegos juegos;
 	public Usuario usuario2;
+	private JButton btnRecuperarJuego;
 	
 
 	/**
@@ -64,7 +65,7 @@ public class FormAdminJuegos extends JFrame {
 		setTitle("Administrar Juegos");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 474, 330);
+		setBounds(100, 100, 474, 360);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -75,7 +76,7 @@ public class FormAdminJuegos extends JFrame {
 		contentPane_1.setBackground(new Color(0, 51, 102));
 		contentPane_1.setLayout(null);
 		contentPane_1.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane_1.setBounds(0, 0, 459, 291);
+		contentPane_1.setBounds(0, 0, 459, 321);
 		contentPane.add(contentPane_1);
 		
 		JButton btnBuscar = new JButton("Buscar");
@@ -156,7 +157,7 @@ public class FormAdminJuegos extends JFrame {
 			}
 		});
 		btnAgregar.setEnabled(false);
-		btnAgregar.setBounds(10, 257, 89, 23);
+		btnAgregar.setBounds(10, 287, 89, 23);
 		contentPane_1.add(btnAgregar);
 		
 		JButton btnBack = new JButton("<");
@@ -178,7 +179,7 @@ public class FormAdminJuegos extends JFrame {
 		});
 		btnEliminar.setEnabled(false);
 		btnEliminar.setBackground(new Color(255, 51, 51));
-		btnEliminar.setBounds(360, 257, 89, 23);
+		btnEliminar.setBounds(360, 287, 89, 23);
 		contentPane_1.add(btnEliminar);
 		
 		btnEditar = new JButton("Editar");
@@ -190,7 +191,7 @@ public class FormAdminJuegos extends JFrame {
 				txtCodigo.setEditable(false);
 			}
 		});
-		btnEditar.setBounds(128, 257, 89, 23);
+		btnEditar.setBounds(128, 287, 89, 23);
 		contentPane_1.add(btnEditar);
 		
 		btnGuardar = new JButton("Guardar");
@@ -202,7 +203,7 @@ public class FormAdminJuegos extends JFrame {
 		}
 		});
 		btnGuardar.setEnabled(false);
-		btnGuardar.setBounds(245, 257, 89, 23);
+		btnGuardar.setBounds(245, 287, 89, 23);
 		contentPane_1.add(btnGuardar);
 		
 		JButton btnHab_Lim = new JButton("Habilitar / Limpiar");
@@ -219,9 +220,26 @@ public class FormAdminJuegos extends JFrame {
 				btnGuardar.setEnabled(false);
 			}
 		});
-		btnHab_Lim.setBounds(35, 223, 148, 23);
+		btnHab_Lim.setBounds(10, 253, 160, 23);
 		contentPane_1.add(btnHab_Lim);
+		
+		btnRecuperarJuego = new JButton("Recuperar Juego");
+		btnRecuperarJuego.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Recovery();
+			}
+		});
+		btnRecuperarJuego.setBackground(new Color(153, 255, 255));
+		btnRecuperarJuego.setBounds(289, 253, 160, 23);
+		contentPane_1.add(btnRecuperarJuego);
 		cargarJuegos();
+	}
+
+	protected void Recovery() {
+		FormRJuego juegosR = new FormRJuego();
+		juegosR.usuario2 = usuario2;
+		juegosR.setVisible(true);
+		this.dispose();
 	}
 
 	protected void hab() {

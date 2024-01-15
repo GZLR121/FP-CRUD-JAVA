@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-01-2024 a las 00:05:43
+-- Tiempo de generación: 15-01-2024 a las 02:32:37
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -47,7 +47,7 @@ INSERT INTO `cliente` (`dni`, `nombre`, `apellidos`, `fecha_nac`, `tfno`, `id_cl
 (987654321, 'Axel', 'Limon', '2014-09-23', 100, 3, b'0'),
 (123, 'Gael2', 'Limon', '2005-01-21', 123, 4, b'0'),
 (1234, 'Ga', 'Li', '2005-01-21', 1234, 8, b'0'),
-(1, 'G', 'L', '2000-01-01', 1, 9, b'1');
+(1, 'G', 'L', '2000-01-01', 1, 9, b'0');
 
 -- --------------------------------------------------------
 
@@ -72,7 +72,7 @@ INSERT INTO `producto` (`codigo`, `nombre`, `precio`, `rfc`, `eliminado`) VALUES
 (2, 'GTA IV', 300, '1234567890', b'0'),
 (3, 'GTA V', 300, '1234567890', b'0'),
 (4, 'GTA San Andreas', 350, '1234567890', b'0'),
-(5, 'tetris', 10, '1234567890', b'1'),
+(5, 'tetris', 10, '1234567890', b'0'),
 (10, 'GTA', 1, '1234567890', b'0');
 
 -- --------------------------------------------------------
@@ -94,7 +94,7 @@ CREATE TABLE `proveedor` (
 
 INSERT INTO `proveedor` (`rfc`, `nombre`, `direccion`, `eliminado`) VALUES
 ('0987654321', 'Test', 'Test1', b'0'),
-('1', 'Name1', 'Dir1', b'1'),
+('1', 'Name1', 'Dir1', b'0'),
 ('1234567890', 'Rockstar Games', 'Carlsbad, California', b'0'),
 ('2', 'Nombre2', 'Direccion2', b'0');
 

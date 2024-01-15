@@ -59,17 +59,17 @@ public class FormLogin extends JFrame {
 		JLabel lblTfno = new JLabel("Telefono:");
 		lblTfno.setForeground(new Color(255, 255, 255));
 		lblTfno.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblTfno.setBounds(97, 69, 70, 14);
+		lblTfno.setBounds(97, 48, 70, 14);
 		contentPane.add(lblTfno);
 		
 		JLabel lblDNI = new JLabel("DNI:");
 		lblDNI.setForeground(new Color(255, 255, 255));
 		lblDNI.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblDNI.setBounds(115, 111, 42, 14);
+		lblDNI.setBounds(115, 90, 42, 14);
 		contentPane.add(lblDNI);
 		
 		txtTfno = new JTextField();
-		txtTfno.setBounds(188, 68, 150, 20);
+		txtTfno.setBounds(188, 47, 150, 20);
 		contentPane.add(txtTfno);
 		txtTfno.setColumns(10);
 		
@@ -81,7 +81,7 @@ public class FormLogin extends JFrame {
 				ingresar();
 			}
 		});
-		btnINGRESAR.setBounds(97, 170, 100, 23);
+		btnINGRESAR.setBounds(100, 149, 100, 23);
 		contentPane.add(btnINGRESAR);
 		
 		JButton btnREGISTRAR = new JButton("REGISTRAR");
@@ -92,13 +92,30 @@ public class FormLogin extends JFrame {
 				registrar();
 			}
 		});
-		btnREGISTRAR.setBounds(238, 170, 100, 23);
+		btnREGISTRAR.setBounds(240, 150, 100, 23);
 		contentPane.add(btnREGISTRAR);
 		
 		txtDNI = new JTextField();
-		txtDNI.setBounds(188, 110, 150, 20);
+		txtDNI.setBounds(188, 89, 150, 20);
 		contentPane.add(txtDNI);
 		txtDNI.setColumns(10);
+		
+		JButton btnRecuperarUsuario = new JButton("RECUPERAR USUARIO");
+		btnRecuperarUsuario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Recovery();
+			}
+		});
+		btnRecuperarUsuario.setFont(new Font("Tahoma", Font.BOLD, 10));
+		btnRecuperarUsuario.setBackground(new Color(153, 255, 255));
+		btnRecuperarUsuario.setBounds(128, 200, 180, 23);
+		contentPane.add(btnRecuperarUsuario);
+	}
+
+	protected void Recovery() {
+		FormRUsuario RUsuario = new FormRUsuario();
+		RUsuario.setVisible(true);
+		this.dispose();
 	}
 
 	protected void registrar() {
@@ -109,12 +126,10 @@ public class FormLogin extends JFrame {
 
 	protected void ingresar() {
 		
-		String tfno = txtTfno.getText();
-		String dni = txtDNI.getText();
+		Long tfno_usuario = Long.parseLong(txtTfno.getText());
+		long dni_usuario = Long.parseLong(txtDNI.getText());
 		
 		GestionUsuario gestionUsuario = new GestionUsuario();
-		long tfno_usuario = Long.parseLong(tfno);
-		long dni_usuario = Long.parseLong(dni);
 		
 		Usuario usuario2 = new Usuario();
 		usuario2.setTfno(tfno_usuario);

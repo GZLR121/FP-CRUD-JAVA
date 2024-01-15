@@ -151,4 +151,39 @@ public class GestionProveedor {
 			return existe;
 
 		}
+		public Proveedor ProveedorRecovery(Proveedor pro) {
+			Proveedor proveedor = null;
+			
+			Connection con = null;
+			PreparedStatement pst = null;
+			ResultSet rs = null;
+			
+			try {
+				
+			 con = MySQLConexion.getConexion();
+			 
+			 String sql = "SELECT * FROM proveedor WHERE rfc = ? and eliminado = 1";
+			 
+			 pst = con.prepareStatement(sql);
+			 
+			 pst.setString(1, pro.getRfc());
+			 
+			 rs = pst.executeQuery();
+			 
+			 while(rs.next()) {
+				 String sql2 = "UPDATE proveedor SET eliminado = 0 WHERE rfc = ?";
+				 
+				 pst = con.prepareStatement(sql2);
+				 pst.setString(1, pro.getRfc());
+				 
+				 pst.execute();
+				 JOptionPane.showMessageDialog(null, "Proveedor Recuperado Exitosamene", "Success", JOptionPane.INFORMATION_MESSAGE);
+			 }
+			
+			}catch (Exception e) {
+				JOptionPane.showMessageDialog(null, "Error al obtener al proveedor", "Error", JOptionPane.ERROR_MESSAGE);
+			}
+			return proveedor;
+	}
+		
 }
